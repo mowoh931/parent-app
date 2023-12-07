@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -71,14 +72,15 @@ public class StudentService {
 
 
     public Flux<Post> getPostList() {
-
-//        RestTemplate restTemplate = new RestTemplate();
-//        return restTemplate.getForObject(Constants.POST_URL, List.class);
-
-
-
-      return   webClient.get().uri(Constants.POST_URL)
+        return webClient.get().uri(Constants.POST_URL)
                 .retrieve()
                 .bodyToFlux(Post.class);
+    }
+
+    public Mono<Post> getPostById(int id) {
+        return webClient.get().uri(Constants.POST_URL)
+                .retrieve()
+                .bodyToMono(Post.class).filter(post -> post.getId() == id);
+
     }
 }

@@ -6,9 +6,11 @@ import com.baar.parentapp.model.User;
 import com.baar.parentapp.service.StudentService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.util.List;
@@ -50,6 +52,11 @@ public class StudentApi {
 
     @GetMapping("get/all/posts")
     public Flux<Post> getPostList() {
-       return studentService.getPostList();
+        return studentService.getPostList();
+    }
+
+    @GetMapping("get/all/posts/id/{id}")
+    public Mono<Post> getPostById(@PathVariable int id) {
+      return   studentService.getPostById(id);
     }
 }

@@ -1,11 +1,13 @@
 package com.baar.parentapp.service;
 
+import com.baar.parentapp.model.Post;
 import com.baar.parentapp.model.Student;
 import com.baar.parentapp.model.User;
 import com.baar.parentapp.util.Constants;
-import com.github.javafaker.Faker;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
 import java.io.File;
@@ -16,13 +18,14 @@ import java.util.List;
 
 @Service
 public class StudentService {
-
+    @Autowired
+    private
+    WebClient webClient;
 
     List<Student> students = List.of(new Student("One", "John", "Dallas"), new Student("Two", "Peter", "New York"));
 
 
     public List<Student> getStudents() {
-
 
 
         List<Student> students = List.of(new Student("One", "John", "Dallas"), new Student("Two", "Peter", "New York"));
@@ -62,9 +65,13 @@ public class StudentService {
         assert users != null;
 
 
+        return Arrays.asList(users);
+
+    }
 
 
-     return Arrays.asList(users);
+    public List<Post> getPostList() {
+
 
     }
 }

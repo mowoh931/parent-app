@@ -83,4 +83,11 @@ public class StudentService {
                 .bodyToMono(Post.class).filter(post -> post.getId() == id);
 
     }
+
+    public Flux<Post> getPostByuserId(int userId) {
+        return webClient.get().uri(Constants.POST_URL)
+                .retrieve()
+                .bodyToFlux(Post.class).filter(post -> post.getUserId() == userId);
+
+    }
 }

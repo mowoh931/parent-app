@@ -1,5 +1,6 @@
 package com.baar.parentapp.api;
 
+import com.baar.parentapp.model.Post;
 import com.baar.parentapp.model.Student;
 import com.baar.parentapp.model.User;
 import com.baar.parentapp.service.StudentService;
@@ -45,5 +46,10 @@ public class StudentApi {
     @GetMapping("get/all/users")
     public List<User> getUsers() {
         return studentService.getUsers();
+    }
+
+    @GetMapping("get/all/posts")
+    public Flux<Post> getPostList() {
+       return studentService.getPostList();
     }
 }

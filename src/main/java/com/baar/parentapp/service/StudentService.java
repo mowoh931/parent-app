@@ -70,8 +70,15 @@ public class StudentService {
     }
 
 
-    public List<Post> getPostList() {
+    public Flux<Post> getPostList() {
+
+//        RestTemplate restTemplate = new RestTemplate();
+//        return restTemplate.getForObject(Constants.POST_URL, List.class);
 
 
+
+      return   webClient.get().uri(Constants.POST_URL)
+                .retrieve()
+                .bodyToFlux(Post.class);
     }
 }

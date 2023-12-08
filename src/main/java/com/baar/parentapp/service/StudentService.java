@@ -27,10 +27,8 @@ public class StudentService {
 
 
     public List<Student> getStudents() {
-
-
-        List<Student> students = List.of(new Student("One", "John", "Dallas"), new Student("Two", "Peter", "New York"));
-        return students;
+        return List.of(new Student("One", "John", "Dallas"),
+                new Student("Two", "Peter", "New York"));
     }
 
     public Student getStudent() throws IOException {
@@ -64,12 +62,9 @@ public class StudentService {
         RestTemplate restTemplate = new RestTemplate();
         User[] users = restTemplate.getForObject("https://jsonplaceholder.typicode.com/users", User[].class);
         assert users != null;
-
-
         return Arrays.asList(users);
 
     }
-
 
     public Flux<Post> getPostList() {
         return webClient.get().uri(Constants.POST_URL)
@@ -87,7 +82,18 @@ public class StudentService {
     public Flux<Post> getPostByuserId(int userId) {
         return webClient.get().uri(Constants.POST_URL)
                 .retrieve()
-                .bodyToFlux(Post.class).filter(post -> post.getUserId() == userId);
+                .bodyToFlux(Post.class)
+                .filter(post -> post.getUserId() == userId);
+    }
+
+
+    public Flux<Post> getPostByTitle(String title) {
+
+        return webClient.get().uri(Constants.POST_URL).retrieve()
+                .bodyToFlux(Post.class)
+                .filter(resp -> resp.getTitle().equalsIgnoreCase(title));
 
     }
+
+
 }

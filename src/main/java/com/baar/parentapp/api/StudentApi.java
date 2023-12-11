@@ -57,6 +57,13 @@ public class StudentApi {
 
     @GetMapping("get/all/posts/id/{id}")
     public Mono<Post> getPostById(@PathVariable int id) {
-      return   studentService.getPostById(id);
+        return studentService.getPostById(id);
     }
+
+    @GetMapping("get/all/posts/title/{title}")
+    public Flux<Post> getPostByTitle(@PathVariable String title) {
+        return studentService.getPostByTitle(title);
+    }
+
+
 }

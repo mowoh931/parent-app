@@ -5,5 +5,4 @@ public interface Constants {
   String studentPath = "src/main/data/student.json";
   String users = "F:\\IntelliJ Idea Projects\\MODULAR\\parent-app\\src\\main\\resources\\user.json";
   String POST_URL = "https://jsonplaceholder.typicode.com/posts";
-  //to ls_new
 }
